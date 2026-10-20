@@ -198,6 +198,34 @@ def test_falls_back_without_json_mode_and_splits_a_chunk_that_is_too_long(fake_s
     assert res["fields"]["governing_law"]["value"] == "Delaware"
 
 
+def test_reasoning_models_think_block_is_stripped():
+    reply = "<think>\nThe NDA says {maybe}... let me check.\n</think>\n\n{\"limited_use\": {\"answer\": \"yes\"}}"
+    assert parse_json(reply) == {"limited_use": {"answer": "yes"}}
+    with pytest.raises(ValueError, match="still thinking"):
+        parse_json("<think>\nStill reasoning about {the clause")
+
+
+def test_thinking_is_switched_off_on_vllm_only_and_dropped_if_refused(fake_server):
+    seen = []
+
+    def vllm_like(body):
+        seen.append(body.get("chat_template_kwargs"))
+        if body.get("chat_template_kwargs") and len(seen) == 1:
+            return 400, {"error": {"message": "Unknown field chat_template_kwargs"}}
+        return json.dumps(per_chunk_responder(body))
+
+    srv = fake_server(vllm_like)  # the fake server reports max_model_len, like vLLM
+    analyst = Analyst(base_url=srv.base_url, api_key="k", model=srv.model, retries=0)
+    assert analyst.is_vllm()
+    res = analyst.analyse(LONG, "commercial")
+    assert not res["errors"] and seen[0] == {"enable_thinking": False} and seen[-1] is None
+    assert analyst.no_thinking is False  # refused once: not sent again
+
+    hosted = Analyst(client=object(), model="m")
+    hosted._vllm = False
+    assert not hosted.is_vllm()  # hosted APIs never get the vLLM-only option
+
+
 def test_models_that_refuse_temperature_are_asked_without_it(fake_server):
     seen = []
 

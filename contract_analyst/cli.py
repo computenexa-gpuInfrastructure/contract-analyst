@@ -69,6 +69,7 @@ def cmd_evaluate(args) -> int:
     meta = report.write_evaluation(result, {
         "dataset": args.dataset, "split": args.split, "skip": args.skip, "limit": args.limit, "model": analyst.model,
         "instructions": args.instructions, "temperature_zero": analyst.temperature,
+        "thinking_off_requested": analyst.no_thinking and analyst.is_vllm(),
         "doc_type": DATASET_DOC_TYPE[args.dataset], "chunk_chars": analyst.chunk_chars,
         "context_tokens": analyst.context_tokens, "workers": args.workers}, out)
     (out / "extractions.json").write_text(json.dumps(preds, indent=1, ensure_ascii=False))

@@ -71,9 +71,17 @@ def build_messages(fields: list[Field], doc_type: str, part: reader.Chunk, n_par
     return [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
 
+THINK = re.compile(r"<think>.*?</think>", re.S)
+
+
 def parse_json(text: str) -> dict:
-    """The model's reply -> dict. Copes with ```json fences, text around the object and trailing commas."""
+    """The model's reply -> dict. Copes with ```json fences, text around the object, trailing commas, and a
+    reasoning model's <think>...</think> block before the answer."""
     text = (text or "").strip()
+    if "</think>" in text:
+        text = THINK.sub("", text).split("</think>")[-1].strip()
+    elif text.startswith("<think>"):
+        raise ValueError("the model was still thinking when the answer ran out (thinking should be off)")
     text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text)
     try:
         data = json.loads(text)
@@ -211,6 +219,10 @@ class Analyst:
         self.retries = retries
         self.json_mode = True  # response_format={"type": "json_object"}; switched off if the server refuses it
         self.temperature = True  # temperature=0 for repeatable answers; dropped for models that refuse the setting
+        # Reasoning models (e.g. Qwen3.x) think out loud by default. On vLLM we ask for thinking off per request
+        # (chat_template_kwargs, a vLLM extension; hosted APIs don't get it); dropped if a server refuses it.
+        self.no_thinking = True
+        self._vllm: bool | None = None
         self._chunk_chars = chunk_chars
         self.context_tokens = None
 
@@ -220,6 +232,20 @@ class Analyst:
             self.context_tokens = self._served_context()
             self._chunk_chars = reader.chunk_chars_for(self.context_tokens)
         return self._chunk_chars
+
+    def is_vllm(self) -> bool:
+        """vLLM's /v1/models says owned_by "vllm" and reports max_model_len; hosted APIs don't."""
+        if self._vllm is None:
+            self._vllm = False
+            try:
+                for m in self.client.models.list().data:
+                    extra = getattr(m, "model_extra", None) or {}
+                    if getattr(m, "owned_by", None) == "vllm" or extra.get("max_model_len"):
+                        self._vllm = True
+                        break
+            except Exception:
+                pass
+        return self._vllm
 
     def _served_context(self) -> int | None:
         """vLLM's /v1/models reports max_model_len for each served model."""
@@ -241,6 +267,8 @@ class Analyst:
             kwargs = {"response_format": {"type": "json_object"}} if self.json_mode else {}
             if self.temperature:
                 kwargs["temperature"] = 0
+            if self.no_thinking and self.is_vllm():
+                kwargs["extra_body"] = {"chat_template_kwargs": {"enable_thinking": False}}
             try:
                 resp = self.client.chat.completions.create(model=self.model, messages=messages,
                                                            max_tokens=MAX_TOKENS, **kwargs)
@@ -248,6 +276,9 @@ class Analyst:
                 msg = str(e).lower()
                 # Decide on what THIS request sent: with several documents at a time, another thread may already
                 # have switched the setting off while this request was in flight.
+                if "extra_body" in kwargs and ("chat_template_kwargs" in msg or "enable_thinking" in msg):
+                    self.no_thinking = False  # a server that doesn't take chat-template options
+                    continue
                 if "temperature" in kwargs and "temperature" in msg:
                     self.temperature = False  # e.g. some hosted models only allow their default sampling
                     continue
