@@ -10,7 +10,7 @@ It's for **builders**: startups, agencies and in-house teams making a document-r
   ComputeNexa Model API, or a hosted API for comparison);
 - **an honest evaluation:** two public, lawyer-labelled benchmarks (CUAD and ContractNLI), with accuracy, speed and
   cost per document;
-- **the improvement loop:** plain questions, then guided instructions, then fine-tuning (coming in Part 2).
+- **the improvement loop:** plain questions, then guided instructions, then fine-tuning (next).
 
 Read the case study: [Building a private contract analyst on one GPU](https://computenexa.com/case-studies/private-contract-analyst/). MIT licence; the datasets keep their own CC BY 4.0 licences (see Credits).
 
