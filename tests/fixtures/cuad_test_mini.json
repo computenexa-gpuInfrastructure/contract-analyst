@@ -1,0 +1,164 @@
+{
+ "version": "aok_v1.0",
+ "data": [
+  {
+   "title": "Northwind_Services",
+   "paragraphs": [
+    {
+     "qas": [
+      {
+       "answers": [],
+       "id": "Northwind_Services__Document Name",
+       "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "Northwind Ltd.",
+         "answer_start": 70
+        },
+        {
+         "text": "Contoso Corp.",
+         "answer_start": 102
+        }
+       ],
+       "id": "Northwind_Services__Parties",
+       "question": "Highlight the parts (if any) of this contract related to \"Parties\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "5/6/2019",
+         "answer_start": 53
+        }
+       ],
+       "id": "Northwind_Services__Agreement Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Agreement Date\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Effective Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Effective Date\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Expiration Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Expiration Date\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Renewal Term",
+       "question": "Highlight the parts (if any) of this contract related to \"Renewal Term\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Notice Period To Terminate Renewal",
+       "question": "Highlight the parts (if any) of this contract related to \"Notice Period To Terminate Renewal\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "This Agreement is governed by the laws of Ontario, Canada.",
+         "answer_start": 305
+        }
+       ],
+       "id": "Northwind_Services__Governing Law",
+       "question": "Highlight the parts (if any) of this contract related to \"Governing Law\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "Either party may terminate this Agreement for convenience on thirty (30) days' notice.",
+         "answer_start": 129
+        }
+       ],
+       "id": "Northwind_Services__Termination For Convenience",
+       "question": "Highlight the parts (if any) of this contract related to \"Termination For Convenience\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Cap On Liability",
+       "question": "Highlight the parts (if any) of this contract related to \"Cap On Liability\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Uncapped Liability",
+       "question": "Highlight the parts (if any) of this contract related to \"Uncapped Liability\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Anti-Assignment",
+       "question": "Highlight the parts (if any) of this contract related to \"Anti-Assignment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Audit Rights",
+       "question": "Highlight the parts (if any) of this contract related to \"Audit Rights\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Exclusivity",
+       "question": "Highlight the parts (if any) of this contract related to \"Exclusivity\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "Provider shall maintain commercial general liability insurance of at least $1,000,000.",
+         "answer_start": 217
+        }
+       ],
+       "id": "Northwind_Services__Insurance",
+       "question": "Highlight the parts (if any) of this contract related to \"Insurance\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Minimum Commitment",
+       "question": "Highlight the parts (if any) of this contract related to \"Minimum Commitment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Ip Ownership Assignment",
+       "question": "Highlight the parts (if any) of this contract related to \"Ip Ownership Assignment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Change Of Control",
+       "question": "Highlight the parts (if any) of this contract related to \"Change Of Control\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Non-Compete",
+       "question": "Highlight the parts (if any) of this contract related to \"Non-Compete\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Liquidated Damages",
+       "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      }
+     ],
+     "context": "SERVICES AGREEMENT\n\nThis Services Agreement is dated 5/6/2019 between Northwind Ltd. (\"Provider\") and Contoso Corp. (\"Client\").\n\nEither party may terminate this Agreement for convenience on thirty (30) days' notice.\n\nProvider shall maintain commercial general liability insurance of at least $1,000,000.\n\nThis Agreement is governed by the laws of Ontario, Canada.\n"
+    }
+   ]
+  }
+ ]
+}

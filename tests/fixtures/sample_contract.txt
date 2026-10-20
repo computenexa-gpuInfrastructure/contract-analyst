@@ -1,0 +1,13 @@
+MASTER SUPPLY AGREEMENT
+
+This Master Supply Agreement (the "Agreement") is made on March 3, 2021 between Acme Widgets, Inc. ("Supplier") and Blue River Foods LLC ("Buyer").
+
+1. Term. This Agreement starts on April 1, 2021 (the "Effective Date") and ends on March 31, 2024. It renews automatically for successive one (1) year terms unless either party gives sixty (60) days' written notice of non-renewal.
+
+2. Exclusivity. Buyer shall purchase the Products exclusively from Supplier during the Term.
+
+3. Liability. In no event shall either party's total liability exceed the fees paid in the twelve months before the claim.
+
+4. Assignment. Neither party may assign this Agreement without the prior written consent of the other party.
+
+5. Governing Law. This Agreement is governed by the laws of the State of New York.

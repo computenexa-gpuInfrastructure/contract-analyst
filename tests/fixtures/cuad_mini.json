@@ -1,0 +1,353 @@
+{
+ "version": "aok_v1.0",
+ "data": [
+  {
+   "title": "AcmeWidgets_MSA",
+   "paragraphs": [
+    {
+     "qas": [
+      {
+       "answers": [
+        {
+         "text": "MASTER SUPPLY AGREEMENT",
+         "answer_start": 0
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Document Name",
+       "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "Acme Widgets, Inc.",
+         "answer_start": 105
+        },
+        {
+         "text": "Blue River Foods LLC",
+         "answer_start": 141
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Parties",
+       "question": "Highlight the parts (if any) of this contract related to \"Parties\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "March 3, 2021",
+         "answer_start": 83
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Agreement Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Agreement Date\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "This Agreement starts on April 1, 2021",
+         "answer_start": 183
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Effective Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Effective Date\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "ends on March 31, 2024",
+         "answer_start": 249
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Expiration Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Expiration Date\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "It renews automatically for successive one (1) year terms",
+         "answer_start": 273
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Renewal Term",
+       "question": "Highlight the parts (if any) of this contract related to \"Renewal Term\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "unless either party gives sixty (60) days' written notice of non-renewal",
+         "answer_start": 331
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Notice Period To Terminate Renewal",
+       "question": "Highlight the parts (if any) of this contract related to \"Notice Period To Terminate Renewal\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "This Agreement is governed by the laws of the State of New York.",
+         "answer_start": 752
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Governing Law",
+       "question": "Highlight the parts (if any) of this contract related to \"Governing Law\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Termination For Convenience",
+       "question": "Highlight the parts (if any) of this contract related to \"Termination For Convenience\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "In no event shall either party's total liability exceed the fees paid in the twelve months before the claim.",
+         "answer_start": 514
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Cap On Liability",
+       "question": "Highlight the parts (if any) of this contract related to \"Cap On Liability\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Uncapped Liability",
+       "question": "Highlight the parts (if any) of this contract related to \"Uncapped Liability\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "Neither party may assign this Agreement without the prior written consent of the other party.",
+         "answer_start": 639
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Anti-Assignment",
+       "question": "Highlight the parts (if any) of this contract related to \"Anti-Assignment\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Audit Rights",
+       "question": "Highlight the parts (if any) of this contract related to \"Audit Rights\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "Buyer shall purchase the Products exclusively from Supplier during the Term.",
+         "answer_start": 422
+        }
+       ],
+       "id": "AcmeWidgets_MSA__Exclusivity",
+       "question": "Highlight the parts (if any) of this contract related to \"Exclusivity\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Insurance",
+       "question": "Highlight the parts (if any) of this contract related to \"Insurance\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Minimum Commitment",
+       "question": "Highlight the parts (if any) of this contract related to \"Minimum Commitment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Ip Ownership Assignment",
+       "question": "Highlight the parts (if any) of this contract related to \"Ip Ownership Assignment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Change Of Control",
+       "question": "Highlight the parts (if any) of this contract related to \"Change Of Control\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Non-Compete",
+       "question": "Highlight the parts (if any) of this contract related to \"Non-Compete\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "AcmeWidgets_MSA__Liquidated Damages",
+       "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      }
+     ],
+     "context": "MASTER SUPPLY AGREEMENT\n\nThis Master Supply Agreement (the \"Agreement\") is made on March 3, 2021 between Acme Widgets, Inc. (\"Supplier\") and Blue River Foods LLC (\"Buyer\").\n\n1. Term. This Agreement starts on April 1, 2021 (the \"Effective Date\") and ends on March 31, 2024. It renews automatically for successive one (1) year terms unless either party gives sixty (60) days' written notice of non-renewal.\n\n2. Exclusivity. Buyer shall purchase the Products exclusively from Supplier during the Term.\n\n3. Liability. In no event shall either party's total liability exceed the fees paid in the twelve months before the claim.\n\n4. Assignment. Neither party may assign this Agreement without the prior written consent of the other party.\n\n5. Governing Law. This Agreement is governed by the laws of the State of New York.\n"
+    }
+   ]
+  },
+  {
+   "title": "Northwind_Services",
+   "paragraphs": [
+    {
+     "qas": [
+      {
+       "answers": [],
+       "id": "Northwind_Services__Document Name",
+       "question": "Highlight the parts (if any) of this contract related to \"Document Name\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "Northwind Ltd.",
+         "answer_start": 70
+        },
+        {
+         "text": "Contoso Corp.",
+         "answer_start": 102
+        }
+       ],
+       "id": "Northwind_Services__Parties",
+       "question": "Highlight the parts (if any) of this contract related to \"Parties\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "5/6/2019",
+         "answer_start": 53
+        }
+       ],
+       "id": "Northwind_Services__Agreement Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Agreement Date\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Effective Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Effective Date\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Expiration Date",
+       "question": "Highlight the parts (if any) of this contract related to \"Expiration Date\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Renewal Term",
+       "question": "Highlight the parts (if any) of this contract related to \"Renewal Term\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Notice Period To Terminate Renewal",
+       "question": "Highlight the parts (if any) of this contract related to \"Notice Period To Terminate Renewal\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "This Agreement is governed by the laws of Ontario, Canada.",
+         "answer_start": 305
+        }
+       ],
+       "id": "Northwind_Services__Governing Law",
+       "question": "Highlight the parts (if any) of this contract related to \"Governing Law\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [
+        {
+         "text": "Either party may terminate this Agreement for convenience on thirty (30) days' notice.",
+         "answer_start": 129
+        }
+       ],
+       "id": "Northwind_Services__Termination For Convenience",
+       "question": "Highlight the parts (if any) of this contract related to \"Termination For Convenience\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Cap On Liability",
+       "question": "Highlight the parts (if any) of this contract related to \"Cap On Liability\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Uncapped Liability",
+       "question": "Highlight the parts (if any) of this contract related to \"Uncapped Liability\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Anti-Assignment",
+       "question": "Highlight the parts (if any) of this contract related to \"Anti-Assignment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Audit Rights",
+       "question": "Highlight the parts (if any) of this contract related to \"Audit Rights\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Exclusivity",
+       "question": "Highlight the parts (if any) of this contract related to \"Exclusivity\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [
+        {
+         "text": "Provider shall maintain commercial general liability insurance of at least $1,000,000.",
+         "answer_start": 217
+        }
+       ],
+       "id": "Northwind_Services__Insurance",
+       "question": "Highlight the parts (if any) of this contract related to \"Insurance\" that should be reviewed by a lawyer.",
+       "is_impossible": false
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Minimum Commitment",
+       "question": "Highlight the parts (if any) of this contract related to \"Minimum Commitment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Ip Ownership Assignment",
+       "question": "Highlight the parts (if any) of this contract related to \"Ip Ownership Assignment\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Change Of Control",
+       "question": "Highlight the parts (if any) of this contract related to \"Change Of Control\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Non-Compete",
+       "question": "Highlight the parts (if any) of this contract related to \"Non-Compete\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      },
+      {
+       "answers": [],
+       "id": "Northwind_Services__Liquidated Damages",
+       "question": "Highlight the parts (if any) of this contract related to \"Liquidated Damages\" that should be reviewed by a lawyer.",
+       "is_impossible": true
+      }
+     ],
+     "context": "SERVICES AGREEMENT\n\nThis Services Agreement is dated 5/6/2019 between Northwind Ltd. (\"Provider\") and Contoso Corp. (\"Client\").\n\nEither party may terminate this Agreement for convenience on thirty (30) days' notice.\n\nProvider shall maintain commercial general liability insurance of at least $1,000,000.\n\nThis Agreement is governed by the laws of Ontario, Canada.\n"
+    }
+   ]
+  }
+ ]
+}

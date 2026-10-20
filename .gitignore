@@ -1,0 +1,7 @@
+# outputs and downloaded data never go in git
+results/
+*-analysis.html
+.cache/
+*.zip
+__pycache__/
+.venv/
