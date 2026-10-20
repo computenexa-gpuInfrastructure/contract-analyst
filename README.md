@@ -12,7 +12,7 @@ It's for **builders**: startups, agencies and in-house teams making a document-r
   cost per document;
 - **the improvement loop:** plain questions, then guided instructions, then fine-tuning (coming in Part 2).
 
-Read the case study: *link coming*. MIT licence; the datasets keep their own CC BY 4.0 licences (see Credits).
+Read the case study: [Building a private contract analyst on one GPU](https://computenexa.com/case-studies/private-contract-analyst/). MIT licence; the datasets keep their own CC BY 4.0 licences (see Credits).
 
 > **Not legal advice.** This is a demo of what a private model can do. Answers can be wrong or incomplete. Check
 > every answer against the contract and ask a lawyer before you rely on it. Every output says this too.
