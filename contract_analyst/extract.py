@@ -210,6 +210,7 @@ class Analyst:
         self.client = client
         self.retries = retries
         self.json_mode = True  # response_format={"type": "json_object"}; switched off if the server refuses it
+        self.temperature = True  # temperature=0 for repeatable answers; dropped for models that refuse the setting
         self._chunk_chars = chunk_chars
         self.context_tokens = None
 
@@ -238,12 +239,19 @@ class Analyst:
         last, attempt = None, 0
         while attempt <= self.retries:
             kwargs = {"response_format": {"type": "json_object"}} if self.json_mode else {}
+            if self.temperature:
+                kwargs["temperature"] = 0
             try:
-                resp = self.client.chat.completions.create(model=self.model, messages=messages, temperature=0,
+                resp = self.client.chat.completions.create(model=self.model, messages=messages,
                                                            max_tokens=MAX_TOKENS, **kwargs)
             except BadRequestError as e:
                 msg = str(e).lower()
-                if self.json_mode and ("response_format" in msg or "json" in msg) and "context" not in msg:
+                # Decide on what THIS request sent: with several documents at a time, another thread may already
+                # have switched the setting off while this request was in flight.
+                if "temperature" in kwargs and "temperature" in msg:
+                    self.temperature = False  # e.g. some hosted models only allow their default sampling
+                    continue
+                if "response_format" in kwargs and ("response_format" in msg or "json" in msg) and "context" not in msg:
                     self.json_mode = False  # server without JSON mode: rely on robust parsing (no try used)
                     continue
                 raise

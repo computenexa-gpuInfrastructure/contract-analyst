@@ -198,6 +198,48 @@ def test_falls_back_without_json_mode_and_splits_a_chunk_that_is_too_long(fake_s
     assert res["fields"]["governing_law"]["value"] == "Delaware"
 
 
+def test_models_that_refuse_temperature_are_asked_without_it(fake_server):
+    seen = []
+
+    def no_temperature(body):
+        seen.append("temperature" in body)
+        if "temperature" in body:
+            return 400, {"error": {"message": "`temperature` is deprecated for this model."}}
+        return json.dumps(per_chunk_responder(body))
+
+    srv = fake_server(no_temperature)
+    analyst = Analyst(base_url=srv.base_url, api_key="k", model=srv.model, chunk_chars=100000, retries=0)
+    res = analyst.analyse(LONG, "commercial")
+    assert not res["errors"] and res["fields"]["governing_law"]["value"] == "Delaware"
+    assert analyst.temperature is False and seen == [True, False]  # asked once more without it, then remembered
+    analyst.analyse(LONG, "commercial")
+    assert seen[2:] == [False]
+
+
+def test_settings_switched_off_by_another_thread_dont_fail_a_request_in_flight(fake_server):
+    import threading
+
+    gate = threading.Barrier(2)
+
+    def picky(body):
+        if "temperature" in body or "response_format" in body:
+            gate.wait(timeout=5)  # both first requests are refused at the same time
+            return 400, {"error": {"message": "`temperature` is deprecated for this model."
+                                   if "temperature" in body else "response_format.type: Input should be 'json_schema'"}}
+        return json.dumps(per_chunk_responder(body))
+
+    srv = fake_server(picky)
+    analyst = Analyst(base_url=srv.base_url, api_key="k", model=srv.model, chunk_chars=100000, retries=0)
+    out = [None, None]
+    threads = [threading.Thread(target=lambda n=n: out.__setitem__(n, analyst.analyse(LONG, "commercial"))) for n in (0, 1)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    assert all(not r["errors"] for r in out), [r["errors"] for r in out]
+    assert analyst.temperature is False and analyst.json_mode is False
+
+
 def test_everything_failing_marks_the_document_failed(fake_server):
     srv = fake_server(lambda body: (500, {"error": {"message": "down"}}))
     res = Analyst(base_url=srv.base_url, api_key="k", model=srv.model, retries=0).analyse("A short NDA.", "nda")

@@ -25,15 +25,22 @@ reports all read from there.
 
 Qwen 2.5 14B Instruct, 4-bit (AWQ), served by vLLM on **one RTX 5090** (32 GB), 4 documents at a time:
 
-| NDAs (ContractNLI) | Plain questions | Guided instructions |
-| --- | --- | --- |
-| Dev set (61 NDAs), accuracy | 66.9% | 74.2% |
-| **Test set (123 NDAs), accuracy** | **67.1%** | **71.8%** |
-| Test set, found the clause (F1) | 72.2% | 79.1% |
-| Seconds / GPU cost per NDA | 2.9 s / $0.0012 | 4.1 s / $0.0017 |
+| NDAs (ContractNLI test, 123) | Private, plain | Private, guided | Claude Sonnet 5.5, hosted (reference) |
+| --- | --- | --- | --- |
+| Accuracy | 67.1% | 71.8% | 86.3% |
+| Found the clause (F1) | 72.2% | 79.1% | 90.3% |
+| Cost per 1,000 NDAs | ~$1.20 | ~$1.70 | ~$15 |
 
-Commercial contracts (CUAD) and a hosted-API reference column: *coming with the case study*. Costs use the GPU's
-price per hour × wall time; you pay for the GPU by the minute, not per token.
+| Commercial contracts (CUAD test, 102) | Private, plain | Claude Sonnet 5.5, hosted (reference) |
+| --- | --- | --- |
+| Risk flags and other yes/no fields right | 88.0% | 90.4% |
+| Dates, durations, governing law exactly right | 76.3% | 83.5% |
+| Cost per 1,000 contracts | ~$2.30 | ~$63 |
+
+Private costs are GPU time (one RTX 5090 at $1.49 an hour, billed by the minute); hosted costs are from the API
+provider's usage page. On the dev set (61 NDAs), guided instructions moved the private model from 66.9% to 74.2%.
+The hosted model was given the same plain questions; it doesn't accept temperature 0, so its answers can vary
+slightly between runs.
 
 ## What it extracts
 
@@ -117,6 +124,12 @@ that's your own vLLM server, a ComputeNexa Model API, or a hosted API you want t
    `evaluate` writes `results.json`, `per_field.csv`, `predictions.csv`, `extractions.json` and `report.html` (a
    standalone page: per-field table and a drill-down per document with our quote next to the gold evidence).
    `--workers 4` (default) sends 4 documents at a time; vLLM batches them, so throughput goes up for free.
+
+   **Some documents failed** (a rate limit, a timeout)? Re-run only those, then everything is scored again:
+
+   ```bash
+   python -m contract_analyst retry results/nda
+   ```
 
    **Changed the checks or the scoring?** Score the saved answers again, no GPU needed (before / after comparisons
    must use the same scorer):

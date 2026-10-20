@@ -106,3 +106,25 @@ def test_evaluate_guided_with_skip_and_rescore(fake_server, fixture_cache, model
     assert cli.main(["rescore", str(out)]) == 0  # same documents: the skip is kept
     again = json.loads((out / "rescored" / "results.json").read_text())
     assert again["summary"]["documents"] == 1 and again["summary"]["accuracy_macro"] == res["summary"]["accuracy_macro"]
+
+
+def test_retry_reanalyses_only_failed_documents(fake_server, fixture_cache, model_env, tmp_path, capsys):
+    def breaks_on_nda_2(body):
+        if "reverse engineer" in parse_prompt(body["messages"])[1]:
+            return 500, {"error": {"message": "GPU on fire"}}
+        return keyword_responder(body)
+
+    out = tmp_path / "r"
+    model_env(fake_server(breaks_on_nda_2))
+    assert cli.main(["evaluate", "--dataset", "contractnli", "--out", str(out), "--timeout", "5", "--retries", "0"]) == 0
+    first = json.loads((out / "results.json").read_text())
+    assert first["summary"]["failed_documents"] == 1
+
+    healed = fake_server()  # the same model name, now answering
+    model_env(healed)
+    assert cli.main(["retry", str(out), "--retries", "0"]) == 0
+    again = json.loads((out / "results.json").read_text())
+    assert again["summary"]["failed_documents"] == 0 and again["meta"]["retried"] == ["cnli-2"]
+    assert again["summary"]["wall_seconds"] == first["summary"]["wall_seconds"]  # a repair, not a new measurement
+    assert "failed documents 1 -> 0" in capsys.readouterr().out
+    assert cli.main(["retry", str(out)]) == 0  # nothing left

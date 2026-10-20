@@ -68,7 +68,7 @@ def cmd_evaluate(args) -> int:
     out = Path(args.out)
     meta = report.write_evaluation(result, {
         "dataset": args.dataset, "split": args.split, "skip": args.skip, "limit": args.limit, "model": analyst.model,
-        "instructions": args.instructions,
+        "instructions": args.instructions, "temperature_zero": analyst.temperature,
         "doc_type": DATASET_DOC_TYPE[args.dataset], "chunk_chars": analyst.chunk_chars,
         "context_tokens": analyst.context_tokens, "workers": args.workers}, out)
     (out / "extractions.json").write_text(json.dumps(preds, indent=1, ensure_ascii=False))
@@ -104,6 +104,37 @@ def cmd_rescore(args) -> int:
           f", found F1 {_f(before['found_f1_macro']).strip()} -> {_f(after['found_f1_macro']).strip()}, "
           f"unverified answers {before['unverified_answers']} -> {after['unverified_answers']}")
     print(f"Report: {out / 'report.html'}")
+    return 0
+
+
+def cmd_retry(args) -> int:
+    """Analyse again only the documents that failed (or partly failed) in a saved evaluation, then score everything
+    again. Keeps the original wall time and cost (the retry is a repair, not a second measurement)."""
+    src = Path(args.results)
+    saved = json.loads((src / "results.json").read_text())
+    meta, before = saved["meta"], saved["summary"]
+    preds = json.loads((src / "extractions.json").read_text())
+    docs = select(datasets.load(meta["dataset"], meta["split"]), meta.get("skip"), meta.get("limit"))
+    todo = [d for d in docs if not preds.get(d.id) or preds[d.id].get("failed") or preds[d.id].get("errors")]
+    if not todo:
+        print("Nothing to retry: no failed documents.")
+        return 0
+    analyst = Analyst(chunk_chars=meta.get("chunk_chars"), timeout=args.timeout, retries=args.retries,
+                      instructions=meta.get("instructions") or "plain")
+    if analyst.model != meta["model"]:
+        raise SystemExit(f"CNX_MODEL is {analyst.model!r} but these results are for {meta['model']!r}.")
+    print(f"Retrying {len(todo)} document(s) with {analyst.model}", file=sys.stderr)
+    redo, _ = run_batch(analyst, todo, args.workers)
+    preds.update(redo)
+    wall = before["wall_seconds_per_document"] * before["documents"]
+    result = score.score(docs, preds, wall_seconds=wall, price_per_hour=before["price_per_hour"])
+    meta = dict(meta, retried=sorted(redo), temperature_zero=meta.get("temperature_zero", True) and analyst.temperature)
+    report.write_evaluation(result, meta, src)
+    (src / "extractions.json").write_text(json.dumps(preds, indent=1, ensure_ascii=False))
+    print_summary(result)
+    after = result["summary"]
+    print(f"\nAccuracy {_f(before['accuracy_macro']).strip()} -> {_f(after['accuracy_macro']).strip()}, failed documents "
+          f"{before['failed_documents']} -> {after['failed_documents']}")
     return 0
 
 
@@ -180,6 +211,12 @@ def main(argv=None) -> int:
     r.add_argument("results", help="a folder written by evaluate (results.json + extractions.json)")
     r.add_argument("--out", help="where to write the new report (default <results>/rescored)")
     r.set_defaults(func=cmd_rescore)
+
+    t = sub.add_parser("retry", help="analyse again only the failed documents of a saved evaluation, then rescore")
+    t.add_argument("results", help="a folder written by evaluate")
+    t.add_argument("--workers", type=int, default=2)
+    common(t)
+    t.set_defaults(func=cmd_retry)
 
     d = sub.add_parser("download", help="download the datasets into the cache")
     d.add_argument("--dataset", choices=["cuad", "contractnli", "all"], default="all")
